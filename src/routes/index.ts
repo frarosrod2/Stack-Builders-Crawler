@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { crawlController } from "../controllers/crawl.controller.js";
-import { filterController } from "../controllers/filter.controller.js";
+import { entriesController } from "../controllers/entries.controller.js";
+import { usageLogController } from "../controllers/usage-log.controller.js";
 
 const router = Router();
 
-router.get("/crawl", crawlController);
-router.get("/filter", filterController);
+router.get("/entries", entriesController);
+router.get("/logs", usageLogController);
 
 export default router;

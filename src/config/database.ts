@@ -10,25 +10,27 @@ const DB_PATH = process.env["DB_PATH"] ?? DEFAULT_DB_PATH;
 let _db: IDatabase | null = null;
 
 export const getDb = (): IDatabase => {
-    if (!_db) {
-        const dir = dirname(DB_PATH);
-        if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
-        _db = new Database(DB_PATH);
-        _db.pragma("journal_mode = WAL");
-        runMigrations(_db);
-    }
-    return _db;
+  if (!_db) {
+    const dir = dirname(DB_PATH);
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    _db = new Database(DB_PATH);
+    _db.pragma("journal_mode = WAL");
+    runMigrations(_db);
+  }
+  return _db;
 };
 
 
 const runMigrations = (db: Database.Database): void => {
-    db.exec(`
+  db.exec(`
     CREATE TABLE IF NOT EXISTS usage_logs (
       id              INTEGER PRIMARY KEY AUTOINCREMENT,
       timestamp         TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
       filter_applied    TEXT   DEFAULT NULL,
       items_found       INTEGER NOT NULL DEFAULT 0,
-      execution_time_ms INTEGER NOT NULL DEFAULT 0
+      execution_time_ms INTEGER NOT NULL DEFAULT 0,
+      user_agent    TEXT   DEFAULT NULL,
+      client_ip    TEXT   DEFAULT NULL
     );
   `);
 };

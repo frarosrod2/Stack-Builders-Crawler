@@ -12,7 +12,6 @@ const parseIntSafe = (text = ""): number => {
 
 export const crawl = async (url = SOURCE_URL): Promise<Entry[]> => {
     const { data: html } = await axios.get<string>(url, {
-        headers: { "User-Agent": "hn-crawler/1.0 (educational project)" },
         timeout: 10_000,
     });
 

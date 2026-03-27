@@ -6,4 +6,6 @@ export interface UsageLogParams {
     filterApplied: FilterType;
     itemsFound: number;
     executionTimeMs: number;
+    userAgent: string | null;
+    clientIp: string | null;
 }

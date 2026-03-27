@@ -21,6 +21,8 @@ export const applyFilter = (entries: Entry[], filterType: FilterType): Entry[] =
     switch (filterType) {
         case "long_titles": return filterMoreThanFiveWords(entries);
         case "short_titles": return filterFiveOrLessWords(entries);
-        case "none": return entries;
+        default: {
+            throw new Error(`Unexpected filter type: ${filterType}`);
+        }
     }
 };
