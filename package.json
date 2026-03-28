@@ -11,7 +11,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -36,6 +37,7 @@
     "@types/cheerio": "^0.22.35",
     "@types/express": "^5.0.6",
     "@types/node": "^25.5.0",
+    "@vitest/coverage-v8": "^4.1.2",
     "eslint": "^10.1.0",
     "tsx": "^4.21.0",
     "typescript": "^5.7.0",
