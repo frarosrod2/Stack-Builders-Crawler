@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import { afterEach, beforeEach, describe, expect, it, Mock, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, Mock, MockInstance, vi } from "vitest";
 import { EntriesController } from "../src/controllers/entries.controller";
 import { Entry } from "../src/dtos/entry.dto";
+import * as entryService from '../src/services/entry.service';
 import { UsageLogService } from "../src/services/usage-log.service";
 
 const mockEntries: Entry[] = [
@@ -23,15 +24,15 @@ const mockReq = (query: Record<string, string> = {}): Request =>
   }) as unknown as Request;
 
 describe("EntriesController", () => {
-  let getEntriesMock: Mock;
+  let getEntriesMock: MockInstance;
   let createLogMock: Mock;
   let controller: EntriesController;
 
   beforeEach(() => {
-    getEntriesMock = vi.fn().mockResolvedValue(mockEntries);
+    getEntriesMock = vi.spyOn(entryService, 'getEntries').mockResolvedValue(mockEntries);
     createLogMock = vi.fn();
 
-    controller = new EntriesController({ getEntries: getEntriesMock }, {
+    controller = new EntriesController({
       createLog: createLogMock,
     } as unknown as UsageLogService);
   });

@@ -2,10 +2,10 @@ import axios from "axios";
 import * as cheerio from "cheerio";
 import { Entry } from "../dtos/entry.dto.js";
 
-export const CACHE_TTL_MS = 30_000;
+export const CACHE_TTL_MS = 30_000; //30 seconds
 const ENTRIES_LIMIT = 30;
 const SOURCE_URL = "https://news.ycombinator.com/";
-let cache: { entries: Entry[]; expiresAt: number } | null = null;
+let cache: { entries: Entry[]; expiresAt: number; } | null = null;
 
 const parseIntSafe = (text = ""): number => {
   const digits = text.replace(/[^0-9]/g, "");

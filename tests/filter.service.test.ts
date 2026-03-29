@@ -17,7 +17,7 @@ describe("applyFilter", () => {
         expect(result[0].comments).toBeGreaterThanOrEqual(result[1].comments);
     });
 
-    it("long_titles should filter correctly", () => {
+    it("short_titles should filter correctly", () => {
         const result = applyFilter(entries, "short_titles");
 
         expect(result.length).toBe(2);

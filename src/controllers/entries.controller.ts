@@ -1,13 +1,12 @@
 import { Request, Response } from "express";
-import { EntryService } from "../services/entry.service.js";
+import { getEntries } from "../services/entry.service.js";
 import { UsageLogService } from "../services/usage-log.service.js";
 import { isValidFilter } from "../utils/filter-helper.js";
 
 export class EntriesController {
   constructor(
-    private readonly entryService: EntryService,
     private readonly usageLogService: UsageLogService,
-  ) {}
+  ) { }
 
   async getEntries(req: Request, res: Response): Promise<void> {
     const start = Date.now();
@@ -15,7 +14,7 @@ export class EntriesController {
 
     try {
       const filterType = filter && isValidFilter(filter) ? filter : undefined;
-      const result = await this.entryService.getEntries(filterType);
+      const result = await getEntries(filterType);
 
       this.usageLogService.createLog({
         timestamp: new Date().toISOString(),
