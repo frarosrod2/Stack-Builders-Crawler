@@ -196,6 +196,12 @@ src/
 tests/                       # Tests
 ADR.md                       # Architecture Decision Records
 ```
+---
+
+## Commit Convention
+
+This project follows [Conventional Commits](https://www.conventionalcommits.org/).
+Commit messages are structured as `<type>[optional scope]: <description>`
 
 ---
 
